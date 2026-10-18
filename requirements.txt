@@ -1,0 +1,8 @@
+kivymd
+kivy
+requests
+fastapi
+uvicorn
+bcrypt
+psycopg2-binary
+cryptography
