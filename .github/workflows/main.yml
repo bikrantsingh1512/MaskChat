@@ -12,14 +12,21 @@ jobs:
       with:
         python-version: '3.10'
 
+    - name: Clear Buildozer Cache & Set Permissions
+      run: |
+        rm -rf ~/.buildozer
+        mkdir -p ~/.buildozer/android/platform/
+        chmod +x -R .
+
     - name: Install Android Build Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libssl-dev cmake
-        pip install --upgrade pip buildozer cython virtualenv
+        sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libssl-dev cmake libffi-dev
+        pip install --upgrade pip buildozer cython virtualenv sh
 
     - name: Build APK with Buildozer
       run: |
+        # यह कमांड बिना किसी रुकावट के सीधे क्लीन बिल्ड करेगी
         buildozer android debug
       
     - name: Upload APK Artifact
